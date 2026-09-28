@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Иван Петров — Адвокат | Юридическая помощь</title>
+    <title>Наумов Сергей — Адвокат | Юридическая помощь</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -46,12 +46,17 @@
             justify-content: space-between;
             align-items: center;
         }
-
         .logo {
             color: #fff;
             font-size: 22px;
             font-weight: bold;
             letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity .2s;
+        }
+        .logo:hover {
+            opacity: 0.8;
         }
         .logo span { color: var(--gold-light); }
 
@@ -402,7 +407,8 @@
 <!-- ШАПКА -->
 <header id="header">
     <div class="container nav">
-        <div class="logo">Сергей <span>&</span> Партнёры</div>
+        <a href="#top" class="logo">Сергей <span>&</span> Партнёры</a>
+<!--        <div class="logo">Сергей <span>&</span> Партнёры</div>-->
         <ul class="nav-links">
             <li><a href="#services">Услуги</a></li>
             <li><a href="#about">Обо мне</a></li>
@@ -414,7 +420,7 @@
 </header>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="top">
     <div class="container hero-inner">
         <div>
             <h1>Профессиональная <em>юридическая защита</em> ваших интересов</h1>
