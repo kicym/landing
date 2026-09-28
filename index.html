@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иван Петров — Адвокат | Юридическая помощь</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --dark: #1a2332;
+            --gold: #b8952e;
+            --gold-light: #d4af37;
+            --bg: #f8f7f4;
+            --text: #2c2c2c;
+            --muted: #6b7280;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+        }
+
+        /* ---------- ШАПКА ---------- */
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: rgba(26, 35, 50, 0.97);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            padding: 18px 0;
+            transition: padding .3s;
+        }
+        header.scrolled { padding: 12px 0; }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .logo span { color: var(--gold-light); }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #e5e7eb;
+            text-decoration: none;
+            font-size: 15px;
+            font-family: Arial, sans-serif;
+            transition: color .2s;
+        }
+        .nav-links a:hover { color: var(--gold-light); }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 30px;
+            background: var(--gold);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 3px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            letter-spacing: .5px;
+            transition: all .25s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184, 149, 46, 0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+        }
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            background: linear-gradient(135deg, #1a2332 0%, #2d3e56 100%);
+            color: #fff;
+            padding: 160px 0 90px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: -100px; top: -100px;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(184,149,46,0.15), transparent 70%);
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        .hero h1 em {
+            color: var(--gold-light);
+            font-style: normal;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #cbd5e1;
+            font-family: Arial, sans-serif;
+            margin-bottom: 35px;
+            max-width: 520px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* ---------- МЕСТО ПОД ФОТО ---------- */
+        .photo-placeholder {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 3 / 4;
+            margin: 0 auto;
+            border: 3px solid var(--gold);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #94a3b8;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+        }
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* ---------- СЕКЦИИ ---------- */
+        section { padding: 90px 0; }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-family: Arial, sans-serif;
+            margin-bottom: 60px;
+            font-size: 16px;
+        }
+        .divider {
+            width: 70px;
+            height: 3px;
+            background: var(--gold);
+            margin: 0 auto 20px;
+        }
+
+        /* ---------- УСЛУГИ ---------- */
+        .services { background: #fff; }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg);
+            padding: 40px 30px;
+            border-radius: 6px;
+            border-bottom: 3px solid transparent;
+            transition: all .3s;
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            border-bottom-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
+
+        .service-icon {
+            font-size: 38px;
+            margin-bottom: 18px;
+        }
+        .service-card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+        .service-card p {
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        /* ---------- О СЕБЕ ---------- */
+        .about-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-inner .photo-placeholder {
+            max-width: 100%;
+            border-color: var(--dark);
+        }
+
+        .about-text h2 {
+            font-size: 34px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        .about-text p {
+            font-family: Arial, sans-serif;
+            color: #4b5563;
+            margin-bottom: 16px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 35px;
+        }
+        .stat { text-align: center; }
+        .stat-num {
+            font-size: 34px;
+            color: var(--gold);
+            font-weight: bold;
+        }
+        .stat-label {
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        /* ---------- ПРЕИМУЩЕСТВА ---------- */
+        .advantages { background: var(--dark); color: #fff; }
+        .advantages .section-title { color: #fff; }
+        .advantages .section-subtitle { color: #94a3b8; }
+
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 30px;
+        }
+        .adv-item {
+            text-align: center;
+            padding: 20px;
+        }
+        .adv-item .num {
+            font-size: 42px;
+            color: var(--gold-light);
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .adv-item h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .adv-item p {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        /* ---------- КОНТАКТЫ ---------- */
+        .contacts { background: #fff; }
+
+        .contacts-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info h3 {
+            font-size: 26px;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+        .contact-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 22px;
+            font-family: Arial, sans-serif;
+        }
+        .contact-item .ico {
+            font-size: 20px;
+            color: var(--gold);
+            width: 24px;
+        }
+        .contact-item strong {
+            display: block;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+        .contact-item span { color: var(--muted); }
+        .contact-item a { color: var(--muted); text-decoration: none; }
+        .contact-item a:hover { color: var(--gold); }
+
+        form { display: flex; flex-direction: column; gap: 16px; }
+        input, textarea {
+            padding: 14px 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            font-family: Arial, sans-serif;
+            font-size: 15px;
+            transition: border-color .2s;
+            background: var(--bg);
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #fff;
+        }
+        textarea { resize: vertical; min-height: 110px; }
+
+        .form-note {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        /* ---------- ФУТЕР ---------- */
+        footer {
+            background: var(--dark);
+            color: #94a3b8;
+            padding: 35px 0;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+        }
+        footer a { color: var(--gold-light); text-decoration: none; }
+
+        /* ---------- АДАПТИВ ---------- */
+        @media (max-width: 900px) {
+            .hero-inner, .about-inner, .contacts-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero p { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero h1 { font-size: 34px; }
+            .about-text .stats { justify-items: center; }
+            .nav-links { display: none; }
+            section { padding: 60px 0; }
+            .section-title { font-size: 28px; }
+            .photo-placeholder { max-width: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ШАПКА -->
+<header id="header">
+    <div class="container nav">
+        <div class="logo">Сергей <span>&</span> Партнёры</div>
+        <ul class="nav-links">
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#about">Обо мне</a></li>
+            <li><a href="#advantages">Преимущества</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <a href="#contacts" class="btn">Консультация</a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container hero-inner">
+        <div>
+            <h1>Профессиональная <em>юридическая защита</em> ваших интересов</h1>
+            <p>Более 15 лет практики в гражданском, уголовном и корпоративном праве. Защищаю ваши права на всех этапах — от консультации до суда.</p>
+            <div class="hero-buttons">
+                <a href="#contacts" class="btn">Записаться на консультацию</a>
+                <a href="#services" class="btn btn-outline">Мои услуги</a>
+            </div>
+        </div>
+
+        <!-- ===== МЕСТО ПОД ФОТО ===== -->
+        <div class="photo-placeholder">
+            <img src="photo.jpg" alt="Иван Петров — адвокат">
+        </div>
+        <!-- ===== /МЕСТО ПОД ФОТО ===== -->
+
+    </div>
+</section>
+
+<!-- УСЛУГИ -->
+<section class="services" id="services">
+    <div class="container">
+        <div class="divider"></div>
+        <h2 class="section-title">Направления работы</h2>
+        <p class="section-subtitle">Полный спектр юридических услуг для частных лиц и бизнеса</p>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚖️</div>
+                <h3>Гражданские дела</h3>
+                <p>Споры о недвижимости, наследстве, разделе имущества, взыскание долгов и защита прав потребителей.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏛️</div>
+                <h3>Уголовная защита</h3>
+                <p>Защита на стадии следствия и в суде. Помощь при обысках, допросах и избрании меры пресечения.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💼</div>
+                <h3>Корпоративное право</h3>
+                <p>Сопровождение сделок, регистрация компаний, договорная работа, защита интересов бизнеса.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👨‍👩‍👧</div>
+                <h3>Семейные споры</h3>
+                <p>Расторжение брака, раздел имущества, споры о детях, алименты, брачные договоры.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>Трудовые споры</h3>
+                <p>Незаконное увольнение, взыскание зарплаты, восстановление на работе, споры с работодателем.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">📄</div>
+                <h3>Юридические консультации</h3>
+                <p>Устные и письменные консультации, анализ документов, составление договоров и исков.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- О СЕБЕ -->
+<section id="about">
+    <div class="container about-inner">
+
+        <!-- ===== МЕСТО ПОД ФОТО (второе) ===== -->
+        <div class="photo-placeholder">
+             <img src="photo_2.jpg" alt="Обо мне">
+        </div>
+        <!-- ===== /МЕСТО ПОД ФОТО ===== -->
+
+        <div class="about-text">
+            <h2>Наумов Сергей</h2>
+            <p>Адвокат с 15-летним опытом работы. Специализируюсь на сложных гражданских и уголовных делах. Член Адвокатской палаты, кандидат юридических наук.</p>
+            <p>Мой принцип — честность, внимательность к деталям и настойчивость в достижении результата. Каждое дело веду лично, без передачи помощникам.</p>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-num">15+</div>
+                    <div class="stat-label">лет практики</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">800+</div>
+                    <div class="stat-label">выигранных дел</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">98%</div>
+                    <div class="stat-label">успешных исходов</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ПРЕИМУЩЕСТВА -->
+<section class="advantages" id="advantages">
+    <div class="container">
+        <div class="divider"></div>
+        <h2 class="section-title">Почему выбирают меня</h2>
+        <p class="section-subtitle">Профессиональный подход к каждому делу</p>
+
+        <div class="adv-grid">
+            <div class="adv-item">
+                <div class="num">01</div>
+                <h4>Личный подход</h4>
+                <p>Каждое дело веду сам, вы всегда на связи с адвокатом, а не с помощником.</p>
+            </div>
+            <div class="adv-item">
+                <div class="num">02</div>
+                <h4>Честная оценка</h4>
+                <p>Реально оцениваю перспективы дела и не обещаю того, что невозможно.</p>
+            </div>
+            <div class="adv-item">
+                <div class="num">03</div>
+                <h4>Прозрачные цены</h4>
+                <p>Стоимость фиксируется в договоре. Никаких скрытых платежей и доплат.</p>
+            </div>
+            <div class="adv-item">
+                <div class="num">04</div>
+                <h4>Опыт в судах</h4>
+                <p>Практика во всех инстанциях, включая Верховный суд и апелляцию.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- КОНТАКТЫ -->
+<section class="contacts" id="contacts">
+    <div class="container">
+        <div class="divider"></div>
+        <h2 class="section-title">Свяжитесь со мной</h2>
+        <p class="section-subtitle">Первая консультация — бесплатно</p>
+
+        <div class="contacts-inner">
+            <div class="contact-info">
+                <h3>Контакты</h3>
+
+                <div class="contact-item">
+                    <div class="ico">📞</div>
+                    <div>
+                        <strong>Телефон</strong>
+                        <a href="tel:+79001234567">+375(29)3253274</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="ico">✉️</div>
+                    <div>
+                        <strong>Email</strong>
+                        <a href="mailto:info@petrov-law.ru">info@petrov-law.ru</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="ico">📍</div>
+                    <div>
+                        <strong>Офис</strong>
+                        <span>г. Москва, ул. Пушкина, д. 10, офис 305</span>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="ico">🕐</div>
+                    <div>
+                        <strong>Часы работы</strong>
+                        <span>Пн–Пт: 9:00 – 19:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <form onsubmit="event.preventDefault(); alert('Спасибо! Я свяжусь с вами в течение дня.');">
+                <input type="text" placeholder="Ваше имя" required>
+                <input type="tel" placeholder="Телефон" required>
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Кратко опишите ситуацию"></textarea>
+                <button type="submit" class="btn">Отправить заявку</button>
+                <p class="form-note">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer>
+    <div class="container">
+        <p>© 2026 Адвокат Наумов Сергей. Все права защищены.</p>
+        <p style="margin-top:8px; font-size:13px;">Информация на сайте не является юридической консультацией.</p>
+    </div>
+</footer>
+
+<script>
+    // Плавная прокрутка
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', e => {
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Сжатие шапки при скролле
+    window.addEventListener('scroll', () => {
+        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+    });
+</script>
+
+</body>
+</html>
